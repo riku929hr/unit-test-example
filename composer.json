@@ -1,0 +1,23 @@
+{
+  "name": "riku929hr/unit-test-example",
+  "description": "an unit test example.",
+  "type": "project",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Riku929hr\\UnitTestExample\\": "src/"
+    },
+    "psr-4-dev": {
+      "Riku929hr\\UnitTestExample\\Tests\\": "tests/"
+    }
+  },
+  "authors": [
+    {
+      "name": "riku929hr",
+      "email": "33782267+riku929hr@users.noreply.github.com"
+    }
+  ],
+  "require-dev": {
+    "phpunit/phpunit": "^11.2"
+  }
+}
