@@ -2,24 +2,25 @@
 
 namespace Riku929hr\UnitTestExample;
 
+use Throwable;
+
 class Checkout
 {
-  public function __construct(
-    private PriceCalculator $priceCalculator
-  ) {
-  }
+    public function __construct(
+        private DiscountCalculator $priceCalculator
+    ) {
+    }
 
-  /**
-   * @param int[] $items
-   */
-  public function checkout(array $items): void
-  {
-    $total = array_sum($items);
-
-
-    $this->priceCalculator->calculate($total);
-    // 何らかの処理
-    // ...
-
-  }
+    public function checkout(int $total): bool
+    {
+        try {
+            $this->priceCalculator->calculate($total);
+            // 何らかの処理
+            // ...
+            return true;
+        } catch (Throwable $e) {
+            // 何らかの処理
+            return false;
+        }
+    }
 }

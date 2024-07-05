@@ -3,29 +3,25 @@
 namespace Riku929hr\UnitTestExample\Tests;
 
 use Riku929hr\UnitTestExample\Checkout;
-use Riku929hr\UnitTestExample\PriceCalculator;
+use Riku929hr\UnitTestExample\DiscountCalculator;
 
 use PHPUnit\Framework\TestCase;
 
 class CheckoutTest extends TestCase
 {
-  public function test_割引されて購入が成功する()
-  {
-    $priceCalculator = $this->createMock(PriceCalculator::class);
+    public function test_購入が成功する()
+    {
+        $discountCalculator = new DiscountCalculator();
+        $checkout = new Checkout($discountCalculator);
 
-    $priceCalculator->expects($this->once())
-      ->method('calculate')
-      ->with(10); // 1+2+3+4 = 10
+        $this->assertTrue($checkout->checkout(100));
+    }
 
-    $checkout = new Checkout($priceCalculator);
-    $checkout->checkout([1, 2, 3, 4]);
-  }
-
-  public function test_割引無しで購入が成功する()
-  {
-    $priceCalculator = $this->createMock(PriceCalculator::class);
-    $priceCalculator->method('calculate')->willReturn(90);
-
-    $checkout = new Checkout($priceCalculator);
-  }
+    // public function test_割引無しで購入が成功する()
+    // {
+    //   $priceCalculator = $this->createMock(PriceCalculator::class);
+    //   $priceCalculator->method('calculate')->willReturn(90);
+    //
+    //   $checkout = new Checkout($priceCalculator);
+    // }
 }
